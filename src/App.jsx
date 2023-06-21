@@ -19,6 +19,7 @@ function App() {
 					street: data.address.street,
 					city: data.address.city,
 				},
+				phoneNumbers : ['', '']
 			}
 		},
 	})
@@ -32,8 +33,10 @@ function App() {
 			<form
 				noValidate
 				onSubmit={handleSubmit(onSubmit)}
-				className="bg-gray-500 min-h-screen flex flex-col gap-3 justify-center items-center"
+				className="bg-black min-h-screen flex justify-center items-center text-white"
 			>
+			<div className=" flex flex-col gap-2">
+      <label htmlFor="firstname">firstname</label>
 				<input
 					{...register("firstName", {
 						required: "This is required",
@@ -42,9 +45,11 @@ function App() {
 							return fieldValue !== "Elon" || "Enter a different firstName"
 						},
 					})}
-					className=" border-2 border-red-500 p-2"
+					id="firstname"
+					className=" border-2 border-gray-500 bg-slate-400 p-2"
 				/>
 				<p>{errors.firstName && errors.firstName.message}</p>
+      <label htmlFor="lastName">Lastname</label>
 				<input
 					{...register("lastName", {
 						required: "This is required.",
@@ -59,26 +64,46 @@ function App() {
 							},
 						},
 					})}
-					className=" border-2 border-red-500 p-2"
+					id="lastName"
+					className=" border-2 border-gray-500 bg-slate-400 p-2"
 				/>
 				<p>{errors.lastName && errors.lastName.message}</p>
+      <label htmlFor="email">Email</label>
 				<input
-					className=" border-2 border-red-500 p-2"
+					className=" border-2 border-gray-500 bg-slate-400 p-2"
+					id="email"
 					type="email"
 					{...register("email", {
 						required: "Email is required",
 					})}
 				/>
 				<p>{errors.email && errors.email.message}</p>
+      <label htmlFor="city">City</label>
 				<input
-					className=" border-2 border-red-500 p-2"
+					id="city"
+					className=" border-2 border-gray-500 bg-slate-400 p-2"
 					{...register("address.city")}
 				/>
+			<label htmlFor="street">Street</label>
 				<input
-					className=" border-2 border-red-500 p-2"
+					id="street"
+					className=" border-2 border-gray-500 bg-slate-400 p-2"
 					{...register("address.street")}
 				/>
-				<button className=" bg-black text-white w-32">Submit</button>
+      <label htmlFor="primaryPhone">Primary Phone Number</label>
+				<input
+					id="primaryPhone"
+					className=" border-2 border-gray-500 bg-slate-400 p-2"
+					{...register("phoneNumbers.0")}
+				/>
+      <label htmlFor="secondaryPhone">Secondary Phone Number</label>
+				<input
+					id="secondaryPhone"
+					className=" border-2 border-gray-500 bg-slate-400 p-2"
+					{...register("phoneNumbers.1")}
+				/>
+				<button className="border-2 border-blue-600 text-white w-32">Submit</button>
+			</div>
 			</form>
 			<DevTool control={control} />
 		</>
