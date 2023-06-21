@@ -8,15 +8,19 @@ function App() {
 		control,
 		formState: { errors },
 	} = useForm({
-		defaultValues: async ()=>{
-			const res = await fetch('https://jsonplaceholder.typicode.com/users/1')
+		defaultValues: async () => {
+			const res = await fetch("https://jsonplaceholder.typicode.com/users/1")
 			const data = await res.json()
 			return {
-				firstName : data.name,
-				lastName : data.username,
-				email: data.email 
+				firstName: data.name,
+				lastName: data.username,
+				email: data.email,
+				address: {
+					street: data.address.street,
+					city: data.address.city,
+				},
 			}
-		}
+		},
 	})
 
 	const onSubmit = (data) => {
@@ -66,6 +70,14 @@ function App() {
 					})}
 				/>
 				<p>{errors.email && errors.email.message}</p>
+				<input
+					className=" border-2 border-red-500 p-2"
+					{...register("address.city")}
+				/>
+				<input
+					className=" border-2 border-red-500 p-2"
+					{...register("address.street")}
+				/>
 				<button className=" bg-black text-white w-32">Submit</button>
 			</form>
 			<DevTool control={control} />
